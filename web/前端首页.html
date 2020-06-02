@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #eeeeee;
+        }
+        .navbar-text a  {
+            color: #ffffff;
+        }
+        .login-text {
+            margin-right: 50px;
+        }
+        .logo {
+            color: #E94F4C;
+            font-size: 35px;
+            display: inline-block;
+        }
+        .search-box {
+            height: 48px;
+        }
+        .input-group-addon {
+            background-color:#E94F4C;
+            border: none;
+            color: #ffffff;
+        }
+        .control-icon {
+            position: absolute;
+            top: 50%;
+        }
+        .mgt38 {
+            margin-top: 30px;
+        }
+        .thumbnail a img {
+            height: 200px;
+            width: 200px;
+        }
+        .thumbnail .description {
+            height: 40px;
+            overflow: hidden;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        h3, p.desc-title {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="color: #ffffff;"><i class="fa fa-sign-language"></i> 寻欢易购</a>
+            </div>
+            <p class="navbar-text navbar-right login-text">
+                <a href="#">登录</a>
+            </p>
+            <p class="navbar-text navbar-right">
+                <a href="仿京东注册.html">注册</a>
+            </p>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-1 search-box">
+                <a href="#" class="logo">
+                    <i class="fa fa-sign-language"></i>
+                </a>
+            </div>
+            <div class="col-xs-9 search-box">
+                <div class="input-group search-box">
+                    <input class="form-control search-box">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-2 search-box">
+                <button class="btn btn-danger btn-block search-box">
+                    <i class="fa fa-cart-arrow-down" style="font-size: 20px;"></i>&nbsp;&nbsp;购物车
+                    <span class="badge">3</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="carousel-example" class="carousel slide mgt38" data-ride="carousel">
+                <!-- 小圆点 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example" data-slide-to="1"></li>
+                    <li data-target="#carousel-example" data-slide-to="2"></li>
+                    <li data-target="#carousel-example" data-slide-to="4"></li>
+                </ol>
+
+                <!-- 放置图片 -->
+                <div class="carousel-inner">
+
+                    <!-- 展示每张图片以及文字 -->
+                    <div class="item active">
+                        <img src="images/banner1.webp">
+                    </div>
+                    <div class="item">
+                        <img src="images/banner1.webp">
+                    </div>
+                    <div class="item">
+                        <img src="images/banner1.webp">
+                    </div>
+                    <div class="item">
+                        <img src="images/banner1.webp">
+                    </div>
+                </div>
+
+                <!-- 左边的箭头 -->
+                <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+                    <span class="fa fa-chevron-left control-icon"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <!-- 右边的箭头 -->
+                <a class="right carousel-control" href="#carousel-example" data-slide="next">
+                    <span class="fa fa-chevron-right control-icon"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="row mgt38">
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/bookes/jvm.jpg">
+                        <div class="caption">
+                            <h3>JVM</h3>
+                            <p>
+                                深入理解 Java 虚拟机：JVM高级特性与最佳实践（第2版）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/bookes/thinkofjava.jpg">
+                        <div class="caption">
+                            <h3>Java编程思想</h3>
+                            <p>
+                                编程思想+算法导论（京东套装共2册）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/bookes/scw.jpg">
+                        <div class="caption">
+                            <h3>沈从文</h3>
+                            <p>
+                                沈从文经典书籍：慢慢走走又停停+往昔之梦+我喜欢你（京东共3册）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/bookes/mcnxs.jpg">
+                        <div class="caption">
+                            <h3>明朝那些事儿</h3>
+                            <p class="description">
+                                明朝那些事儿（全套共9册增补版）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/computer/dell.jpg">
+                        <div class="caption">
+                            <h3>明朝那些事儿</h3>
+                            <p class="description">
+                                明朝那些事儿（全套共9册增补版）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/computer/dell_inspire.jpg">
+                        <div class="caption">
+                            <h3>明朝那些事儿</h3>
+                            <p class="description">
+                                明朝那些事儿（全套共9册增补版）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="http://localhost/computer/huashuo.jpg">
+                        <div class="caption">
+                            <h3>明朝那些事儿</h3>
+                            <p class="description">
+                                明朝那些事儿（全套共9册增补版）
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

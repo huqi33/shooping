@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #e6e7e8;
+        }
+        form {
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+        .register-panel {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .tab-content {
+            padding-top: 8px;;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="color: #ffffff;"><i class="fa fa-sign-language"></i> 寻欢易购</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xs-push-3 register-panel">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#phoneRegister" data-toggle="tab">手机号注册</a></li>
+                <li><a href="#usernameRegister" data-toggle="tab">用户名密码注册</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="phoneRegister">
+                    <div id="phoneRegisterError" style="display: none;" class="alert alert-danger">
+                        <span id="registerErrorMsg"></span>
+                        <button class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form onsubmit="javascript: return false;">
+                        <div class="form-group">
+                            <label for="phone">电话</label>
+                            <input type="text" autocomplete="off" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="validateCode">验证码</label>
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" id="validateCode" class="form-control">
+                                <!--  cursor: pointer; 将鼠标的形状改为手状。-->
+                                <span class="input-group-addon" id="secondCountDown" style="cursor: pointer;">获取验证码</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button onclick="phoneRegister()" class="btn btn-block btn-primary">注册</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="usernameRegister">
+                    <form onsubmit="javascript: return false;">
+                        <div class="form-group">
+                            <label for="username">用户名: </label>
+                            <input type="text" autocomplete="off" class="form-control" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="repassword">重复密码</label>
+                            <input type="text" id="repassword" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="text" autocomplete="off" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div>
+                                <label>
+                                    <input type="radio" name="gender" value="F"> 女
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="M"> 男
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-primary">注册</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    //给获取手机验证码一个点击事件
+    //点击之后,首先验证手机号是否合法,(若不合法则进行提示)然后ajax向后端请求,
+    //发送,然后前端进行输入登录
+    //点击之后sapn会变灰不能点击,并进行60秒倒计时,之后可重复点击
+
+    //绑定点击事件
+    $('#secondCountDown').on('click',getValidateCode);
+
+    //验证手机号并发送验证码的方法
+    function getValidateCode() {
+
+        var phone = $('#phone').val()
+
+        //手机号规则
+        var reg = /^1(44|47|91|99|73|76|77|[358]\d)\d{8}$/;
+        
+        if(!reg.test(phone)){
+            $('#registerErrorMsg').html('手机号不合法');
+            $('#phoneRegisterError').show();
+            return;
+        }
+
+        //点击一次之后就不能点击了
+        $('#secondCountDown').unbind('click');
+        //调用方法进行60秒倒计时
+        countSeconde(60);
+
+        //按钮颜色变灰
+        $('#secondCountDown').css('background-color','#cccccc');
+
+        //让后台发送短信
+        $.ajax({
+            url:'http://localhost:8080/Demo5_13shopping_war_exploded/sms',
+            type:'get',
+            dataype : 'json',
+            data : {phone : phone},
+            success : function (_data) {
+                console.log(_data);
+            }
+        })
+        
+    }
+
+    //给两个框绑定获得焦点事件,得到焦点之后错误信息就隐藏
+    $('#phone,#secondCountDown').focus(function () {
+        $('#phoneRegisterError').hide();
+    })
+
+
+    //进行倒计时的方法
+    function countSeconde(num) {
+        num--;
+        if(num > 0){
+            $('#secondCountDown').html('剩余' + num + '秒');
+            setTimeout(()=>{//递归num秒
+                countSeconde(num);
+            },1000)
+        }else {
+            $('#secondCountDown').html('获取验证码');
+            $('#secondCountDown').on('click',getValidateCode);
+            $('#secondCountDown').css('background-color','#ffffff');
+        }
+    }
+
+    //点击注册后验证手机号和验证码是否合法
+    function phoneRegister() {
+        //获取输入的验证码和手机号
+        var code = $('#validateCode').val()
+        var phone = $('#phone').val()
+        //验证是否合法
+        //手机号规则
+        var reg = /^1(44|47|91|99|73|76|77|[358]\d)\d{8}$/;
+        if(!reg.test(phone)){
+            $('#registerErrorMsg').html('手机号不合法');
+            $('#phoneRegisterError').show();
+            return;
+        }
+
+        //验证码规则
+        reg = /^\d{4}$/;
+        if(reg.test(code)){
+            $('#registerErrorMsg').html('验证码不合法');
+            $('#phoneRegisterError').show();
+            return;
+        }
+
+        //发送ajax请求注册,返回注册信息
+        $.ajax({
+            url:'http://localhost:8080/Demo5_13shopping_war_exploded/phone-register',
+            type:'get',
+            dataType:'json',
+            data :{code: code, phone : phone},
+            success : function (_data) {
+                console.log(_data)
+            }
+        })
+    }
+
+
+
+</script>
+
+</html>
